@@ -1,24 +1,23 @@
-package Lab6bBattleSimulation;
 public class Character {
     final int StartingHealth = 50;
-    final int baseamount = 10;
-    String Name;
-    boolean IsAlive;
-    boolean tooManyPoints = false;
-    int CurrentHealth = StartingHealth;
-    int Health;
-    int Strength;
-    int Speed;
+    public String name;
+    private boolean IsAlive;
+    private boolean tooManyPoints = false;
+    public int CurrentHealth = StartingHealth;
+    private int Health;
+    private int Strength;
+    private int Speed;
+
+
     public Character(String name, int strength, int speed) {
-        this.Name = name;
+        this.name = name;
         this.Strength = strength;
         this.Speed = speed;
-
         if(Strength + Speed == 5 ){
             tooManyPoints = true;
         }
     }
-    void attack
+
 
 
 }
