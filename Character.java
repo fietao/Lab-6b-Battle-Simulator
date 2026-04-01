@@ -2,87 +2,92 @@ import java.util.Random;
 
 public class Character {
 
-    //Attributes
-    public static final int STARTING_HEALTH =50;
+    private static final int STARTING_HEALTH =50;// starting
     private static final int BASE_ATTACK = 10;
     private static final int BASE_HEAL = 5;
 
-    public  int CurrentHealth ;
+    private  int CurrentHealth ;// gets updated
     private int Strength;
     private int Speed;
-    public String name;
+    public String Name;
 
 
-
-//    private boolean IsAlive;
-    private boolean tooManyPoints = false;
-//    private static int Health=5;
-//    private boolean critical_attack ;
-    private static boolean endGame ;
+    public boolean IsAlive = false;
+    public boolean tooManyPoints = false;
+     private boolean critical_attack ;
+     private static boolean endGame ;
 
 
     //Constructor
     public Character(String name, int strength, int speed) {
         this.Strength = strength;
         this.Speed = speed;
-        this.name = name;
+        this.Name = name;
         this.CurrentHealth = STARTING_HEALTH;
 
-        if(Strength + Speed > 5 ){
+        if(Strength + Speed != 5 ){
             tooManyPoints = true;
         }
     }
     //Methods
     Random rnd = new Random();
     public int attack( Character opponent ){
-
         int chance= rnd.nextInt(10)+1;
        int Damage = BASE_ATTACK+Strength;
         if (chance==1){
             Damage +=5;
+            System.out.println("Critical Attack! this turn" + this.getName() + "make " + Damage);
         }
         opponent.takeDamage(Damage);
         return Damage;
     }
 
     public int heal(){
-       int healthGained = (2*Speed)+BASE_HEAL;
-       if (healthGained >STARTING_HEALTH){
-        healthGained=STARTING_HEALTH;
+       int healthAmount = (2*Speed)+BASE_HEAL;
+       if (CurrentHealth+healthAmount>STARTING_HEALTH){// if 45+13(58)>50
+           healthAmount=STARTING_HEALTH-CurrentHealth;// healthAmount is 50-45= 5
+           // healthAmount is 5 gained
+           // now current health is 50
        }
-        return healthGained;
+       //if 20+8=28 and health amount gained is 8
+       CurrentHealth+=healthAmount;// Updates the Current Health by adding heal amount
+        return healthAmount;// returns health gained by heal
     }
 
     public void takeDamage (int Damage){
-        CurrentHealth-=Damage;
+
+        CurrentHealth-=Damage;// updates current health by reducing the damage
     }
 
+
     //Several get methods
-
-
     public int getStrength() {
         return Strength;
     }
-
+    public boolean IsAlive() {
+        if (CurrentHealth > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public int getSpeed() {
         return Speed;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public int getHealth() {
+    public int getCurrentHealth() {
         return CurrentHealth;
     }
 
-    public String toString(){
-        return name + " [ Strength: " + Strength + ", Speed: " + Speed + " ] ";
-
-    }
+    public String toString(){//Prints the String representation
+        return Name + " [ Strength: " + Strength + ", Speed: " + Speed + " ] ";
 
 
 }
-
+}
 
 
