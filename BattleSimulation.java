@@ -14,14 +14,14 @@ public class BattleSimulation {
             System.out.println("Name your character 1");
             scanner.nextLine();
             name1 = scanner.nextLine();
-            System.out.println("put your character 1 strength");
+            System.out.println("put your character 1 strength (0-5)");
 
 
 
             }
-        else{
+        else{}
         Character character1 = new Character("Jet", 3, 2);
-        Character character2 = new Character("V", 4, 1);}
+        Character character2 = new Character("V", 4, 1);
 
         System.out.println("It's a dual to the death. Let's welcome our opponents:");
         System.out.println(character1.getName() + " has " + character1.getCurrentHealth() + " health.");
