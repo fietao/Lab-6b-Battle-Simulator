@@ -23,7 +23,7 @@ public class Character {
             tooManyPoints = true;
         }
     }
-    //Methods for attacking, healing, and taking damage
+    //Methods for attacking, and taking damage
     Random rnd = new Random();
     public int attack( Character opponent ){
         int Damage = calculateDamage();
