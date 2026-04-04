@@ -10,14 +10,8 @@ public class Character {
     private int Strength;
     private int Speed;
     public String Name;
-
-
-    public boolean IsAlive = false;
     public boolean tooManyPoints = false;
-     private boolean critical_attack ;
-     private static boolean endGame ;
-
-
+    
     //Constructor
     public Character(String name, int strength, int speed) {
         this.Strength = strength;
@@ -29,19 +23,23 @@ public class Character {
             tooManyPoints = true;
         }
     }
-    //Methods
+    //Methods for attacking, healing, and taking damage
     Random rnd = new Random();
     public int attack( Character opponent ){
-        int chance= rnd.nextInt(10)+1;
-       int Damage = BASE_ATTACK+Strength;
-        if (chance==1){
-            Damage +=5;
-            System.out.println("Critical Attack! this turn" + this.getName() + "make " + Damage);
-        }
+        int Damage = calculateDamage();
         opponent.takeDamage(Damage);
         return Damage;
     }
-
+    //method for calculating damage
+    public int calculateDamage(){
+        int chance= rnd.nextInt(10)+1;
+        int damage = BASE_ATTACK + Strength;
+        if (chance==1){
+            damage +=5;
+            System.out.println("Critical Attack! this turn " + this.getName() + " make " + damage);
+        }
+        return damage;
+    }
     public int heal(){
        int healthAmount = (2*Speed)+BASE_HEAL;
        if (CurrentHealth+healthAmount>STARTING_HEALTH){// if 45+13(58)>50
@@ -60,6 +58,7 @@ public class Character {
     }
 
 
+ 
     //Several get methods
     public int getStrength() {
         return Strength;
@@ -82,6 +81,13 @@ public class Character {
     public int getCurrentHealth() {
         return CurrentHealth;
     }
+    void checkhealth(){
+            System.out.println("Current health " + this.getName() + ": " + this.getCurrentHealth());
+    }
+    void winningMessage(Character opponent){
+                System.out.println(this.getName() + " has been wins!" + opponent.getName() + " has been defeated!");
+    }
+
 
     public String toString(){//Prints the String representation
         return Name + " [ Strength: " + Strength + ", Speed: " + Speed + " ] ";
